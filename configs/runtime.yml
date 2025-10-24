@@ -1,0 +1,23 @@
+print_freq: 100
+output_dir: './logs'
+checkpoint_freq: 24
+plot_train_batch_freq: 24
+
+sync_bn: True
+find_unused_parameters: True
+verbose_type: 'progress' 
+
+use_amp: False
+scaler:
+  type: GradScaler
+  enabled: True
+
+
+use_ema: False
+ema:
+  type: ModelEMA
+  decay: 0.9999
+  warmups: 1000
+
+cache_imgsz: 960
+ram_cache: False

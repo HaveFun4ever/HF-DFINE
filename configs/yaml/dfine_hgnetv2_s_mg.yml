@@ -1,0 +1,45 @@
+__include__: [
+  '../dataset/visdrone_detection.yml',
+  '../runtime.yml',
+  '../base/dataloader.yml',
+  '../base/optimizer.yml',
+  '../base/dfine_hgnetv2.yml',
+]
+
+output_dir: ./DEIM/outputs/hf-dfine-h-asn
+
+model: DEIM_MG
+
+DEIM_MG:
+  yaml_path: /root/autodl-tmp/deim_mo/DEIM/configs/cfg/dfine-s.yaml
+  pretrained: /root/autodl-tmp/deim_mo/DEIM/weight/hgnetv2/PPHGNetV2_B0_stage1_MG.pth
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.0001
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+
+# Increase to search for the optimal ema
+epoches: 132 # 120 + 4n
+train_dataloader:
+  dataset:
+    transforms:
+      policy:
+        epoch: 120
+  collate_fn:
+    stop_epoch: 120
+    ema_restart_decay: 0.9999
+    base_size_repeat: 20
