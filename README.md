@@ -5,7 +5,11 @@
 > Keywords: UAV imagery, Tiny object detection, Efficient architecture design, Outer-SNWD 
 
 
-# 
+## 🏋️ Training / Validation / Testing
+We provide a unified `train.py` entry point for training, validation and testing.
+--cfg must point to an Ultralytics-style YAML under configs/cfg/
+
+
 
 
 ## 📌 Citation
