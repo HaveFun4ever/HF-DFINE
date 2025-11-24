@@ -28,3 +28,7 @@ If you use this code in your research, please cite:
   author  = {Qianhua Hu and Liantao Wang},
   keywords= {UAV imagery, Tiny object detection, Efficient architecture design, Outer-SNWD}
 }
+
+
+##  Acknowledgement
+Our work is built upon [D-FINE](https://github.com/Peterande/D-FINE) 
